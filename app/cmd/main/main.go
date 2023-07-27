@@ -4,7 +4,8 @@ import (
 	"kafka-service/app/cmd/server"
 	"kafka-service/app/config"
 	"kafka-service/app/domains/v1/modules"
-	"kafka-service/app/domains/v1/modules/kafka/logic"
+	"kafka-service/app/internal/kafka/consumer"
+	"kafka-service/app/internal/kafka/producer"
 )
 
 func main() {
@@ -13,7 +14,8 @@ func main() {
 
 	modules.Modules(s)
 
-	logic.NewKafkaProducer(cfg)
-	logic.NewKafkaConsumer(cfg)
+	producer.NewKafkaProducer(cfg)
+	consumer.NewKafkaConsumer(cfg)
+
 	server.Run(s)
 }

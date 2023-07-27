@@ -21,6 +21,5 @@ type Redis struct {
 }
 
 type DatabaseType struct {
-	MongoDB BaseDatabaseConfig
-	Redis   *Redis
+	Redis *Redis
 }

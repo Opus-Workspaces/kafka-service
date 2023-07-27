@@ -7,15 +7,7 @@ import (
 )
 
 func ConfigDatabase() DatabaseType {
-	var mongo = cfg.PrefixDB + ".mongo"
 	var redis = cfg.PrefixDB + ".redis"
-
-	mongoHost := viper.GetString(mongo + ".host")
-	mongoPort := viper.GetInt(mongo + ".port")
-	mongoUser := viper.GetString(mongo + ".user")
-	mongoPassword := viper.GetString(mongo + ".password")
-	mongoDatabaseName := viper.GetString(mongo + ".db_name")
-	mongoTimeout := viper.GetInt(mongo + ".timeout")
 
 	redisHost := viper.GetString(redis + ".host")
 	redisPort := viper.GetString(redis + ".port")
@@ -27,14 +19,6 @@ func ConfigDatabase() DatabaseType {
 	redisIdleTimeout := viper.GetInt(redis + ".idle_timeout")
 
 	return DatabaseType{
-		MongoDB: BaseDatabaseConfig{
-			Host:         mongoHost,
-			Port:         mongoPort,
-			User:         mongoUser,
-			Password:     mongoPassword,
-			DatabaseName: mongoDatabaseName,
-			Timeout:      mongoTimeout,
-		},
 		Redis: &Redis{
 			Host:        redisHost,
 			Port:        redisPort,

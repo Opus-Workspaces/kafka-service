@@ -6,7 +6,7 @@ import (
 	"kafka-service/app/config"
 	dbCfg "kafka-service/app/config/database"
 	serverCfg "kafka-service/app/config/server"
-	"kafka-service/app/db/mongo"
+
 	"kafka-service/app/models"
 	"net/http"
 	"os"
@@ -15,7 +15,6 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	mongo2 "go.mongodb.org/mongo-driver/mongo"
 )
 
 type Server struct {
@@ -24,7 +23,6 @@ type Server struct {
 	ServerConfig serverCfg.ServerType
 	DBConfig     dbCfg.DatabaseType
 
-	DBMongo *mongo.MongoDB
 	// DBRedis *redis.Client
 }
 
@@ -113,12 +111,6 @@ func Run(s *Server) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	defer cancel()
-	defer func(c *mongo2.Client) {
-		err := mongo.DisconnectMongo(c)
-		if err != nil {
-			fmt.Println("error disconnecting from mongo: ", err)
-		}
-	}(s.DBMongo.Client)
 
 	if err := s.Echo.Shutdown(ctx); err != nil {
 		s.Echo.Logger.Fatal(err)

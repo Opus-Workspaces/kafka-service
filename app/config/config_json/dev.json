@@ -37,10 +37,12 @@
     }
   },
   "KAFKA": {
-    "bootstrap_servers": "localhost:9092",
+    "bootstrap_servers": "localhost:9092,localhost:9093",
     "consumer_group_id": "my-group",
     "topic": "my-topic",
-    "auto_offset_reset": "earliest"
+    "auto_offset_reset": "earliest",
+    "session_timeout_ms": 6000,
+    "enable_auto_offset_store": false
   },
   "LOGGER": {
     "folder": "logs_dev",

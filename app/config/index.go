@@ -55,12 +55,10 @@ type Config struct {
 func LoadConfig() Config {
 
 	cfgServer := server.ConfigServer()
-	// cfgDB := db.ConfigDatabase()
 	cfgKafka := kafka.ConfigKafka()
 
 	return Config{
 		Server: cfgServer,
-		// DB:     cfgDB,
-		Kafka: cfgKafka,
+		Kafka:  cfgKafka,
 	}
 }
